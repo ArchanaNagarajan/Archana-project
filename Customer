@@ -1,0 +1,157 @@
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
+
+public class Customer {
+
+	public static String from,to;
+	public String date;
+	static public int NoOfTickets;
+	public String bus;
+	public static String[] passengerName=new String[25];
+	public static int[] age = new int[25];
+	int total;
+	
+	public void getData() {
+		
+		System.out.println("Enter the starting point from the list ");
+		System.out.println("Chennai  \nTirchy ");
+		Scanner from_place = new Scanner(System.in);
+		from = from_place.next();
+		System.out.println("Enter the destination point from the list ");
+		System.out.println("Salem \nTirchy ");
+		Scanner to_place = new Scanner(System.in);
+		to = to_place.next();
+		System.out.println("enter the date of journey");
+		Scanner dateofJourney = new Scanner(System.in);
+		 date = dateofJourney.nextLine();
+	    try {
+			Date date1=new SimpleDateFormat("dd-MM-yyyy").parse(date);
+		} catch (ParseException e) {
+			System.out.println(e);
+		} 
+	   
+	}
+	public void Busdata() {
+		
+		TravelAgency object = new TravelAgency();
+		if((from.equalsIgnoreCase("Chennai")) && (to.equalsIgnoreCase("Salem"))) {
+			
+			System.out.println("FROM : CHENNAI       TO : SALEM");
+			System.out.println("SRM travels        "+ date +"   10:30 pm   rate: "+object.rateCS);
+			System.out.println("Seat availability :  "+object.seatAvailCS);
+			
+		}
+		else if((from.equalsIgnoreCase("Chennai"))&&(to.equalsIgnoreCase("Tirchy")))
+		 {
+			System.out.println("FROM : CHENNAI       TO : TIRCHY");
+			System.out.println("Rathimeena travels        "+ date +"   07:00 pm   rate: "+object.rateCT);
+			System.out.println("Seat availability :  "+object.seatAvailCT);
+			System.out.println();
+		 }
+		else if((from.equalsIgnoreCase("Tirchy"))&&(to.equalsIgnoreCase("Salem"))) {
+			
+			System.out.println("FROM : TIRCHY       TO : SALEM");
+			System.out.println("SRM travels        "+ date +"   09:30 pm   rate: "+object.rateTS);
+			System.out.println("Seat availability :  "+object.seatAvailTS);
+		}
+	}
+	
+	public void booking() {
+		
+		
+		System.out.println("Do you want to book tickets");
+		Scanner value = new Scanner(System.in);
+		String input = value.next();
+		if(input.equals("Yes")) {
+		   BookTicket();
+		}
+		else {
+			MainProject.display();
+		}
+	}
+	public void BookTicket() {
+		System.out.println("Check the following details to confirm your booking");
+		System.out.println(" starting point "+from);
+		System.out.println("destination point "+to);
+		System.out.println("date of journey "+date);
+		 bus=BusDetails();
+		System.out.println("Number of tickets to be booked");
+		Scanner ticket = new Scanner(System.in);
+		 NoOfTickets=ticket.nextInt();
+		Tickets(NoOfTickets);
+		
+		for(int i=0;i<NoOfTickets;i++) {
+			
+			System.out.println("Enter passenger name");
+			Scanner p_name = new Scanner(System.in);
+			passengerName[i] = p_name.next();
+			System.out.println("Enter the age");
+			Scanner p_age = new Scanner(System.in);
+			age[i] = p_age.nextInt();
+			
+		}
+		System.out.println("Enter the rate of the ticket");
+		Scanner t_rate = new Scanner(System.in);
+		int rate = t_rate.nextInt();
+		 total = rate*NoOfTickets;
+		System.out.println("Total rate to be paid :"+total);
+		display();
+		System.out.println("Do you want book again?");
+		Scanner value = new Scanner(System.in);
+		String input = value.next();
+		if(input.equals("Yes")) {
+		   getData();
+		}
+		else {
+			
+			MainProject.display();
+		}
+	}
+	public int Tickets(int tickets) {
+		
+		this.NoOfTickets=tickets;
+		return tickets;
+		
+	}
+	 public String From(String from1) {
+		this.from=from1;	
+		 return from1;
+		}
+		public String To(String to1) {
+			this.to=to1;
+			return to1;
+		}
+	public String BusDetails() {
+		
+		System.out.println("Enter the travels name");
+		Scanner bus = new Scanner(System.in);
+		String busName = bus.next();
+		return busName;
+		
+	}
+	public void display() {
+		System.out.println();
+		System.out.println("TICKET DETAILS");
+		System.out.println("Starting point: "+from);
+		System.out.println("Reaching point: "+to);
+		System.out.println("Travels Name:  "+bus);
+		System.out.println("Number of tickets"+NoOfTickets);
+        for(int i=0;i<NoOfTickets;i++) {
+			
+			System.out.println(" passenger name:  "+passengerName[i] );
+			System.out.println("passenger age:  "+age[i]);
+		}
+		System.out.println("Total Amount: "+total);
+	}
+	public void customerNew() {
+		 for(int i=0;i<NoOfTickets;i++) {
+				
+				System.out.println(passengerName[i]+" " + age[i] );
+				
+			}
+	}
+		
+	}
+
