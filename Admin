@@ -1,0 +1,78 @@
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Scanner;
+
+public class Admin extends TravelAgency{
+	public String[] travels= {"SRMtravels","Rathimeenatravels"};
+	
+	
+	public void display() {
+		getValue();
+		System.out.println("Do you want add any route");
+		Scanner value1 = new Scanner(System.in);
+		String input1 = value1.next();
+		if(input1.equals("Yes")) {
+			addBuses();
+		}else
+		{
+			System.out.println("Do you want to remove any route");
+			Scanner value = new Scanner(System.in);
+			String input = value1.next();
+			if(input.equals("Yes")) {
+			removeBuses();
+		}else {
+		MainProject.display();
+	}
+		}
+	}
+	public void addBuses() {
+		LinkedList<String> buses = new LinkedList<String>();
+		System.out.println("enter the travels name");
+		Scanner values = new Scanner(System.in);
+		String Bus_name = values.next();
+		buses.add(Bus_name);
+		HashMap<String,String> details = new HashMap();
+		System.out.println("enter the starting point");
+		Scanner from_place = new Scanner(System.in);
+		String From = from_place.next();
+		System.out.println("enter the destination point");
+		Scanner to_place = new Scanner(System.in);
+		String To = to_place.next();
+			details.put(From,To);
+			   for(Map.Entry m : details.entrySet()){    
+			 System.out.println(m.getKey()+" to "+m.getValue()); 
+		}
+			   System.out.println("The bus route is added");
+		}
+	public void removeBuses() {
+		LinkedList<String> buses = new LinkedList<String>();
+		System.out.println("enter the travels name");
+		Scanner values = new Scanner(System.in);
+		String Bus_name = values.next();
+		HashMap<String,String> details = new HashMap();
+		System.out.println("enter the starting point");
+		Scanner from_place = new Scanner(System.in);
+		String From = from_place.next();
+		System.out.println("enter the destination point");
+		Scanner to_place = new Scanner(System.in);
+		String To = to_place.next();
+			details.put(From,To);
+			   for(Map.Entry m : details.entrySet()){    
+			     m.getKey();
+			    m.getValue(); 
+		}
+			   details.remove(From, To);
+			   System.out.println("The bus route is removed");
+		}
+	public void display(int rate) {
+		
+		Amount<Integer>price = new Amount<Integer>();
+		System.out.println("Enter the share");
+		Scanner num2 = new Scanner(System.in);
+		share = num2.nextInt();
+		
+		System.out.println("Amount by admin: "+price.getShare(share));
+}
+}
