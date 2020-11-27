@@ -1,103 +1,192 @@
-mport java.util.HashMap;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Scanner;
 
-class Amount <T >{
-	
-	T share;
-	
-	T getShare(T share) {
-		
-		return share;
-	}
-	
-}
+
 public class TravelAgency extends Customer  {
 	
-	public String travels_name;
+	public static String travels_name;
+	static String travelsname,travelsname1,travelsname2;
+	static int NoOfBuses;
 	public int TotalSeats=25;
-	public String[] travels= {"SRMtravels","Rathimeenatravels"};
 	int NoTickets;
-	String fromVal,toVal;
+	 static String fromVal;
+	static String toVal;
+	public static int share, rate,seat;
+	public static int  rate1,seat1;
+	public static int  rate2,seat2;
 	public static int seatAvailCS=24,rateCS=850;
 	public static int  seatAvailCT=23,rateCT=1080;
 	public  static int seatAvailTS=25,rateTS=920;
 	
 	public void getValue() {
 		
-		System.out.println("Enter the travels name");
-		
-		for(int i=0;i<travels.length;i++) {
-			System.out.println(travels[i]);
-		}
+		HashMap<String,Integer>travels = new HashMap();
+		System.out.println("Enter your travels name");
+		travels.put("SRMtravels", 2);
+		travels.put("Rathimeenatravels", 1);
+		 for(Map.Entry m : travels.entrySet()){    
+		    	
+	         System.out.println(m.getKey()); 
+	         
+		  }  
 		Scanner travelsName = new Scanner(System.in);
-		travels_name = travelsName.next();
-		if("SRMtravels".equals(travels_name)){
-			Srm(from,to);	
+		travelsname = travelsName.next();
+		if("SRMtravels".equals(travelsname)){
+			
+			srm(travelsname);	
+		}else if("Rathimeenatravels".equals(travelsname)) {
+			rathimeena(travelsname);
 		}
-		if("Rathimeenatravels".equals(travels_name)) {
-				rathimeena(from,to);
-			}
-		}
-		
-	public void rathimeena(String from, String to) {
+		else {
+		Admin.add(travelsname);
+		busCheck(travelsname);
+	}
+	}	
+	public void rathimeena(String travelsname) {
 		
 		System.out.println("ROUTES");
-		System.out.println("Chennai to Tirchy");
-		fromVal=From(from);
-		toVal=To(to);
-		if("Chennai".compareTo(fromVal)==0){
-			if("Tirchy".compareTo(toVal)==0){
-		NoTickets=Tickets(NoOfTickets);
-		seatAvailCT-=NoTickets;
-		System.out.println("SeatAvailability: "+seatAvailCT +"  rate: "+rateCT);
+		System.out.println("Travels name:  "+travelsname);
+		from=fromVal="Chennai";
+		to=toVal="Tirchy";
+		buses(from,to);
 		customerCT();
 		customerNew();
 		display(rateCT);
-		}
-		}else {
-			System.out.println("SeatAvailability: "+seatAvailCT +"  rate: "+rateCT);
-			customerCT();
-			display(rateCT);	
-	}}
-	public void Srm(String from,String to) {
+	}
+public void srm(String travelsname) {
 		
 		System.out.println("ROUTES");
-		System.out.println("Chennai to Salem");
-		fromVal=From(from);
-		toVal=To(to);
-		if("Chennai".equals(fromVal)&&("Salem".equals(toVal))) {
-		seatAvailCS-=NoTickets;
-		System.out.println("SeatAvailability: "+seatAvailCS +"  rate: "+rateCS);
+		System.out.println("Travels name:  "+travelsname);
+		from=fromVal="Chennai";
+		to=toVal="Salem";
+		buses(from,to);
 		customerCS();
 		customerNew();
 		display(rateCS);
-		} 
-		else {
-				System.out.println("SeatAvailability: "+seatAvailCS +"  rate: "+rateCS);
-				customerCS();
-				display(rateCS);
-		}
-		System.out.println("Tirchy to Salem");
-		fromVal=From(from);
-		toVal=To(to);
-		if("Tirchy".equals(fromVal)){
-			if("Salem".equals(toVal)) {
-		NoTickets=Tickets(NoOfTickets);
-		seatAvailTS-=NoTickets;
-		System.out.println("SeatAvailability: "+seatAvailTS +"  rate: "+rateTS);
+		from=fromVal="Tirchy";
+		to=toVal="Salem";
+		buses(from,to);
 		customerNew();
 		display(rateTS);
-		} }else
-		{
-		System.out.println("Seat availability :  "+ seatAvailTS + "      rate: "+rateTS);
-		display(rateTS);
-	}
+		
 	}	
-	HashMap<String,Integer> details = new HashMap();
-	public void customerCT() {
+		public static void  buses(String From,String To) {
+			
+			
+			if(From.equals(from)&&(To.equals(to))){
+				travelsname1="Rathimeenatravels";
+				travelsname2="SRMtravels";
+			System.out.println("From:  "+from);
+			System.out.println("To:  "+to);
+			int compare1="Rathimeenatravels".compareTo(travelsname1);
+			int compare2="SRMtravels".compareTo(travelsname1);
+			
+				if((compare1==0)&&("Chennai".compareTo(from)==0)&&("Tirchy".compareTo(to)==0)) {
+					rate=rateCT;
+					seat=seatAvailCT;
+			}else if((compare2==0)&&("Chennai".compareTo(from)==0)&&("Salem".compareTo(to)==0)) {
 
+				rate=rateCS;
+				seat=seatAvailCS;
+		}	
+		else if((compare2==0)&&("Tirchy".compareTo(from)==0)&&("Salem".compareTo(to)==0)) {
+				rate=rateTS;
+				seat=seatAvailTS;
+		}	 
+				
+			System.out.println("Price:  "+rate);
+			seat-=NoOfTickets;
+			System.out.println("Seat Availability:  "+seat);
+			}
+			else {
+				System.out.println("From:  "+from);
+				System.out.println("To:  "+to);
+				System.out.println("Price:  "+rate);
+				System.out.println("Seat Availability:  "+seat);
+			}
+		}
+		public void rathimeenabus(String travelsname) {
+			
+			System.out.println("ROUTES");
+			System.out.println("Travels name:  "+travelsname);
+			fromVal="Chennai";
+			toVal="Tirchy";
+			bus(travelsname);
+			customerCT();
+			customerNew();
+			Admin.display(rateCT);
+		}
+	public void srmbus(String travelsname) {
+			
+			System.out.println("ROUTES");
+			System.out.println("Travels name:  "+travelsname);
+			fromVal="Chennai";
+			toVal="Salem";
+			bus(travelsname);
+			customerCS();
+			customerNew();
+			Admin.display(rateCS);
+			fromVal="Tirchy";
+			toVal="Salem";
+			bus(travelsname);
+			customerNew();
+			Admin.display(rateTS);
+			
+		}	
+	public static void  bus(String travelsname) {
+			
+		travelsname1="Rathimeenatravels";
+		travelsname2="SRMtravels";	
+			int compare1="Rathimeenatravels".compareTo(travelsname1);
+			int compare2="SRMtravels".compareTo(travelsname1);
+			
+				if((compare1==0)&&("Chennai".compareTo(fromVal)==0)&&("Tirchy".compareTo(toVal)==0)) {
+					System.out.println("From:  "+fromVal);
+					System.out.println("To:  "+toVal);
+					rate=rateCT;
+					seat=seatAvailCT;
+					System.out.println("Price:  "+rate);
+					seat-=NoOfTickets;
+					System.out.println("Seat Availability:  "+seat);
+					}
+			else if((compare2==0)&&("Chennai".compareTo(fromVal)==0)&&("Salem".compareTo(to)==0)) {
+
+				System.out.println("From:  "+fromVal);
+				System.out.println("To:  "+toVal);
+				rate1=rateCS;
+				seat1=seatAvailCS;
+				System.out.println("Price:  "+rate1);
+				seat1-=NoOfTickets;
+				System.out.println("Seat Availability:  "+seat1);
+			}
+			else if((compare2==0)&&("Trichy".compareTo(fromVal)==0)&&("Salem".compareTo(to)==0)) {
+				System.out.println("From:  "+fromVal);
+				System.out.println("To:  "+toVal);
+				rate2=rateTS;
+				seat2=seatAvailTS;
+				System.out.println("Price:  "+rate2);
+				seat2-=NoOfTickets;
+				System.out.println("Seat Availability:  "+seat2);
+				}
+		
+		}	 
+		
+	void busCheck(String travelsname) {
+		
+		if((Customer.from==Admin.From)&&(Customer.to==Admin.To)) {
+			NoTickets=NoOfTickets;
+			Admin.seatAvail-=NoTickets;
+			System.out.println("From:  "+from+"  To:  "+to);
+			System.out.println("Seat availability :  "+ Admin.seatAvail + "      rate: "+Admin.rate);
+			customerNew();
+		}
+	}
+	static HashMap<String,Integer> details = new HashMap();
+	public static void customerCT() {
+		System.out.println("CUSTOMER details");
 		details.put("Archana", 21);
 		details.put("Arav", 19);
 		   for(Map.Entry m : details.entrySet()){    
@@ -106,20 +195,21 @@ public class TravelAgency extends Customer  {
 		         
 			  }  
 	}
+	static HashMap<String,Integer> detail = new HashMap<>();
 	public void customerCS() {
-		details.put("Raju", 51);
+		System.out.println("CUSTOMER details");
+		detail.put("Raju", 51);
 		   for(Map.Entry m : details.entrySet()){    
 		    	
 		         System.out.println(m.getKey()+" "+m.getValue()); 
 		         
 			  }  
 	}
-	public void display(int rate) {
+	public static void display(int rate) {
 	
-		Amount<Integer>price = new Amount<Integer>();
 		System.out.println("Enter the share");
 		Scanner num2 = new Scanner(System.in);
-		int share = num2.nextInt();
+	 share = num2.nextInt();
 		int rateTravels=rate-share;
 		System.out.println("Amount by travels: "+rateTravels);
 	}
