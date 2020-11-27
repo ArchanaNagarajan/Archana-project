@@ -5,11 +5,28 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Admin extends TravelAgency{
-	public String[] travels= {"SRMtravels","Rathimeenatravels"};
 	
-	
+	static String Bus_name;
+	static String From,To;
+	static int rate,seatAvail;
 	public void display() {
-		getValue();
+		HashMap<String,Integer>travel = new HashMap();
+		System.out.println("Enter your travels name");
+		travel.put("SRMtravels", 2);
+		travel.put("Rathimeenatravels", 1);
+		 for(Map.Entry m : travel.entrySet()){    
+		    	
+	         System.out.println(m.getKey()); 
+	         
+		  }  
+		Scanner travelsName = new Scanner(System.in);
+		travelsname = travelsName.next();
+       if("SRMtravels".equals(travelsname)){
+			
+			srmbus(travelsname);	
+		}else if("Rathimeenatravels".equals(travelsname)) {
+			rathimeenabus(travelsname);
+		}
 		System.out.println("Do you want add any route");
 		Scanner value1 = new Scanner(System.in);
 		String input1 = value1.next();
@@ -22,57 +39,116 @@ public class Admin extends TravelAgency{
 			String input = value1.next();
 			if(input.equals("Yes")) {
 			removeBuses();
-		}else {
+			}
+	}
 		MainProject.display();
 	}
-		}
-	}
-	public void addBuses() {
-		LinkedList<String> buses = new LinkedList<String>();
-		System.out.println("enter the travels name");
-		Scanner values = new Scanner(System.in);
-		String Bus_name = values.next();
-		buses.add(Bus_name);
+	public static void addBuses() {
+		
+		HashMap<String,Integer>travels = new HashMap();
+		travels.put("SRMtravels", 2);
+		travels.put("Rathimeenatravels", 1);
+		System.out.println("Enter the travels name");
+		Scanner travelsName = new Scanner(System.in);
+		travels_name=travelsName.next();
+		System.out.println("Enter the no of buses");
+		Scanner noOf = new Scanner(System.in);
+		NoOfBuses=noOf.nextInt();
+		travels.put(travels_name, NoOfBuses);
+		for(int i=1;i<=NoOfBuses;i++) {
 		HashMap<String,String> details = new HashMap();
 		System.out.println("enter the starting point");
 		Scanner from_place = new Scanner(System.in);
-		String From = from_place.next();
+		From = from_place.next();
 		System.out.println("enter the destination point");
 		Scanner to_place = new Scanner(System.in);
-		String To = to_place.next();
-			details.put(From,To);
+		To = to_place.next();
+		details.put(From,To);
+	    HashMap<Integer,Integer> detail = new HashMap();
+		System.out.println("enter the rate");
+		Scanner price = new Scanner(System.in);
+	    rate = price.nextInt();
+		System.out.println("enter the Seat availability");			
+		Scanner seats = new Scanner(System.in);
+		seatAvail =seats.nextInt();
+		detail.put(rate, seatAvail);
 			   for(Map.Entry m : details.entrySet()){    
 			 System.out.println(m.getKey()+" to "+m.getValue()); 
 		}
+			   for(Map.Entry map : detail.entrySet()){    
+					 System.out.println("Price:  "+map.getKey()+" Seat Availability:  "+map.getValue()); 
+				} 
 			   System.out.println("The bus route is added");
 		}
-	public void removeBuses() {
-		LinkedList<String> buses = new LinkedList<String>();
-		System.out.println("enter the travels name");
-		Scanner values = new Scanner(System.in);
-		String Bus_name = values.next();
+	}
+	public static void add(String travels_name) {
+		
+		System.out.println("Travels name: "+travels_name);
+		for(int i=1;i<=NoOfBuses;i++) {
+		System.out.println("From:  "+From);
+		System.out.println("To:  "+To);
+		System.out.println("Price:  "+rate);
+		System.out.println("Seat Availability:  "+seatAvail);
+	}
+	}
+	public static void buses(String From,String To) {
+		
+		System.out.println("Travels name:  "+travels_name);
+		System.out.println("From:  "+From);
+		System.out.println("To:  "+To);
+		System.out.println("Price:  "+rate);
+		if(travelsname.equals(busName)&&(From.equals(from)&&(To.equals(to)))) {
+			seatAvail-=NoOfTickets;
+			System.out.println("Seat Availability:  "+seatAvail);
+		}else {
+		System.out.println("Seat Availability:  "+seatAvail);
+		}
+	}
+	public static void removeBuses() {
+		
+		HashMap<String,Integer>travels = new HashMap();
+		travels.put("SRMtravels", 2);
+		travels.put("Rathimeenatravels", 1);
+		System.out.println("Enter the travels name");
+		Scanner travelsName = new Scanner(System.in);
+		travels_name=travelsName.next();
+		System.out.println("Enter the no of buses");
+		Scanner noOf = new Scanner(System.in);
+		NoOfBuses=noOf.nextInt();
+		travels.put(travels_name, NoOfBuses);
 		HashMap<String,String> details = new HashMap();
 		System.out.println("enter the starting point");
-		Scanner from_place = new Scanner(System.in);
-		String From = from_place.next();
+		Scanner fromplace = new Scanner(System.in);
+		 From = fromplace.next();
 		System.out.println("enter the destination point");
 		Scanner to_place = new Scanner(System.in);
-		String To = to_place.next();
-			details.put(From,To);
-			   for(Map.Entry m : details.entrySet()){    
+		To = to_place.next();
+		details.put(From,To);
+		HashMap<Integer,Integer> detail = new HashMap();
+		System.out.println("enter the rate");
+		Scanner price = new Scanner(System.in);
+		rate = price.nextInt();
+		System.out.println("enter the Seat availability");			
+		Scanner seats = new Scanner(System.in);
+		seatAvail =seats.nextInt();
+		detail.put(rate, seatAvail);
+	    for(Map.Entry m : details.entrySet()){    
 			     m.getKey();
 			    m.getValue(); 
-		}
+		} for(Map.Entry map : detail.entrySet()){    
+		     map.getKey();
+		    map.getValue(); 
+	}
 			   details.remove(From, To);
+			   detail.remove(rate, seatAvail);
 			   System.out.println("The bus route is removed");
 		}
-	public void display(int rate) {
+	public static void display(int rate) {
 		
-		Amount<Integer>price = new Amount<Integer>();
 		System.out.println("Enter the share");
 		Scanner num2 = new Scanner(System.in);
 		share = num2.nextInt();
 		
-		System.out.println("Amount by admin: "+price.getShare(share));
+		System.out.println("Amount by admin: "+share);
 }
 }
